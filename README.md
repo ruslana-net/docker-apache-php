@@ -1,4 +1,4 @@
-# Docker - nginx, php-fpm, mysql, phpmyadmin, smtp
+# Docker - apache, php, mysql, phpmyadmin, smtp
 
 ## Edit config file
 
