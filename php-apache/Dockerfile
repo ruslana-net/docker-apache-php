@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y \
     sudo \
     libssl-dev libxml2-dev libpng-dev libcurl4-openssl-dev pkg-config \
     libwebp-dev libjpeg62-turbo-dev libxpm-dev libfreetype6-dev \
-    xvfb libfontconfig xfonts-75dpi fontconfig libjpeg62-turbo libxrender1
+    xvfb libfontconfig xfonts-75dpi fontconfig libjpeg62-turbo libxrender1 \
+    libxslt-dev
 
 RUN eval "$(ssh-agent -s)"
 
@@ -37,7 +38,7 @@ RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} >
 RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
     --with-png-dir --with-zlib-dir --with-freetype-dir
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli opcache gd xml xmlrpc mbstring curl zip
+RUN docker-php-ext-install pdo pdo_mysql mysqli opcache gd xml xmlrpc mbstring curl zip bcmath intl simplexml xsl soap sockets
 
 
 # Install phpunit, the tool that we will use for testing
