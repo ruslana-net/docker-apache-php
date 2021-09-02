@@ -35,10 +35,15 @@ RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} >
 && "date"
 
 # Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
+#RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
     --with-png-dir --with-zlib-dir --with-freetype-dir
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli opcache gd xml xmlrpc mbstring curl zip bcmath intl simplexml xsl soap sockets
+RUN \
+    docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+    && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
+    && docker-php-ext-install pdo pdo_mysql mysqli
+    
+#RUN docker-php-ext-install pdo pdo_mysql mysqli opcache gd xml xmlrpc mbstring curl zip bcmath intl simplexml xsl soap sockets
 
 
 # Install phpunit, the tool that we will use for testing
@@ -56,6 +61,8 @@ RUN rm /etc/apache2/sites-available/000-default.conf \
 
 #RUN echo 'alias sf="php app/console"' >> ~/.bashrc \
 #&& echo 'alias sf3="php bin/console"' >> ~/.bashrc
+
+RUN docker-php-ext-install pdo pdo_mysql mysqli 
 
 RUN a2enmod rewrite
 RUN a2enmod ssl
