@@ -62,7 +62,12 @@ RUN rm /etc/apache2/sites-available/000-default.conf \
 #RUN echo 'alias sf="php app/console"' >> ~/.bashrc \
 #&& echo 'alias sf3="php bin/console"' >> ~/.bashrc
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli 
+RUN docker-php-ext-install pdo pdo_mysql mysqli intl opcache
+
+RUN curl -sS https://get.symfony.com/cli/installer | bash \
+    && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 RUN a2enmod rewrite
 RUN a2enmod ssl
