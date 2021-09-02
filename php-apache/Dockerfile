@@ -36,7 +36,7 @@ RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} >
 
 # Type docker-php-ext-install to see available extensions
 #RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
-    --with-png-dir --with-zlib-dir --with-freetype-dir
+#    --with-png-dir --with-zlib-dir --with-freetype-dir
 
 RUN \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
