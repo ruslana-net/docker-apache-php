@@ -1,5 +1,5 @@
 # See https://github.com/docker-library/php/blob/master/5.6/fpm/Dockerfile
-FROM php:7.2-apache
+FROM php:7.4-apache
 
 MAINTAINER Ruslan Muriev <ruslana.net@gmail.com>
 
